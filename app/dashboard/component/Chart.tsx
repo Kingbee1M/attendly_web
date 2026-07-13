@@ -26,48 +26,15 @@ const options = {
 };
 
 
-const Chart = ({ chartdata, dateRange }: any) => {
-	// Filter records by date range if provided
-	const filteredData = dateRange 
-		? chartdata.filter((record: any) => {
-			if (!record.clockIn) return false;
-			const recordDate = new Date(record.clockIn);
-			if (isNaN(recordDate.getTime())) return false;
-			// Format record date as local YYYY-MM-DD to match dateRange
-			const recordDateStr = `${recordDate.getFullYear()}-${String(recordDate.getMonth() + 1).padStart(2, '0')}-${String(recordDate.getDate()).padStart(2, '0')}`;
-			return recordDateStr >= dateRange.start && recordDateStr <= dateRange.end;
-		})
-		: chartdata.filter((record: any) => record.clockIn);
-
-	// Group by userId to get earliest clock-in per user (for the selected period)
-	const checkInRecords = filteredData
-		.reduce((acc: any, curr: any) => {
-			const userId = curr.userId;
-			if (!acc[userId] || new Date(curr.clockIn) < new Date(acc[userId].clockIn)) {
-				acc[userId] = curr;
-			}
-			return acc;
-		}, {});
-
-	const checkIns = Object.values(checkInRecords);
-
-	// Categorize early vs. late (cutoff 8:00 AM = 480 mins)
-	const earlyCount = checkIns.filter((record: any) => {
-		const date = new Date(record.clockIn);
-		const minutes = date.getHours() * 60 + date.getMinutes();
-		return minutes <= 480;
-	}).length;
-
-	const lateCount = checkIns.filter((record: any) => {
-		const date = new Date(record.clockIn);
-		const minutes = date.getHours() * 60 + date.getMinutes();
-		return minutes > 480;
-	}).length;
+const Chart = ({ earlyCount, lateCount }: { earlyCount?: number; lateCount?: number }) => {
+	// Use 0 if earlyCount or lateCount are undefined
+	const safeEarlyCount = earlyCount ?? 0;
+	const safeLateCount = lateCount ?? 0;
 
 	const data = {
 		labels: ['Early', 'Late'],
 		datasets: [{
-			data: [earlyCount, lateCount],
+			data: [safeEarlyCount, safeLateCount],
 			backgroundColor: ['#2563EB', '#e8776f'],
 			borderWidth: 1
 		}]

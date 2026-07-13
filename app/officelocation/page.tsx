@@ -12,8 +12,10 @@ import OfficeLocationUpdateModal from '@/components/modals/OfficeLocationUpdateM
 
 
 import { useGetOfficeLocationsQuery, useAddOfficeLocationMutation, useUpdateOfficeLocationMutation } from '@/utils/APISlice/officeLocationApi';
+import { useUserPrivileges } from '@/utils/userPrivileges';
 
 const Attendance = () => {
+	const { isSuperAdmin } = useUserPrivileges();
 	const { data: officeData, isLoading } = useGetOfficeLocationsQuery();
 	const [addOfficeLocation, { isSuccess: addSuccess }] = useAddOfficeLocationMutation();
 	const [updateOfficeLocation, { isSuccess: updateSuccess }] = useUpdateOfficeLocationMutation();
@@ -59,12 +61,12 @@ const Attendance = () => {
 				/>
 
 				<div className='flex flex-col md:flex-row gap-5'>
-
-
-					<button className="flex flex-row justify-center items-center px-5 py-[8px] gap-2 !bg-[#2563EB] font-normal text-[14px] leading-[150%] text-[#FFFFFF] rounded-none"
-						onClick={() => setIsOpen(true)}>
-						Create Office
-					</button>
+					{isSuperAdmin && (
+						<button className="flex flex-row justify-center items-center px-5 py-[8px] gap-2 !bg-[#2563EB] font-normal text-[14px] leading-[150%] text-[#FFFFFF] rounded-none"
+							onClick={() => setIsOpen(true)}>
+							Create Office
+						</button>
+					)}
 				</div>
 
 			</div>

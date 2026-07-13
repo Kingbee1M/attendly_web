@@ -93,7 +93,8 @@ const EmployeeDashBoard = () => {
 	}, { skip: shouldSkip });
 	const { data: statsResponse } = useGetDashboardStatsQuery({
 		officeId: summaryOfficeId || undefined,
-		date: getDateRange(selectedDateFilter).start,
+		startDate: getDateRange(selectedDateFilter).start,
+		endDate: getDateRange(selectedDateFilter).end,
 	}, { skip: shouldSkip });
 	const { data: usersData, isLoading: isLoadingUsers } = useGetUsersQuery();
 	const { data: officeData, isLoading: isLoadingOffice } = useGetOfficeLocationsQuery();
@@ -281,7 +282,10 @@ const EmployeeDashBoard = () => {
 					</div>
 
 					<div className='bg-white border border-[#E5E7EB] shadow-[0px_1px_2px_rgba(16,24,40,0.05)]  w-full h-full '>
-						<Chart chartdata={attendanceRecord} dateRange={getDateRange(selectedDateFilter)} />
+						<Chart
+							earlyCount={statsResponse?.data?.data?.earlyArrivals}
+							lateCount={statsResponse?.data?.data?.lateArrivals}
+						/>
 					</div>
 				</div>
 			</div>

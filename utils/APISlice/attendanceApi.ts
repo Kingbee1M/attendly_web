@@ -1,14 +1,14 @@
-import { baseApi } from './baseApi';
+import { baseApi } from "./baseApi";
 
 export const attendanceApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getAttendance: builder.query<any, void>({
-      query: () => '/attendance',
-      providesTags: ['Attendance'],
+      query: () => "/attendance",
+      providesTags: ["Attendance"],
     }),
     getAttendanceParams: builder.query<any, any>({
       query: (params) => ({
-        url: '/attendance',
+        url: "/attendance",
         params: {
           page: params.page,
           limit: params.limit,
@@ -19,11 +19,11 @@ export const attendanceApi = baseApi.injectEndpoints({
           officeId: params.officeId,
         },
       }),
-      providesTags: ['Attendance'],
+      providesTags: ["Attendance"],
     }),
     getAttendanceSummary: builder.query<any, { id?: string; params: any }>({
       query: ({ id, params }) => ({
-        url: id ? `/attendance/summary/${id}` : '/attendance/summary',
+        url: id ? `/attendance/summary/${id}` : "/attendance/summary",
         params: {
           page: params.page,
           limit: params.limit,
@@ -36,21 +36,36 @@ export const attendanceApi = baseApi.injectEndpoints({
     }),
     addAttendanceManual: builder.mutation<any, any>({
       query: (body) => ({
-        url: '/attendance/manual',
-        method: 'POST',
+        url: "/attendance/manual",
+        method: "POST",
         body,
       }),
-      invalidatesTags: ['Attendance'],
+      invalidatesTags: ["Attendance"],
     }),
-    getDashboardStats: builder.query<any, { officeId?: string; date?: string }>({
-      query: ({ officeId, date }) => ({
-        url: '/attendance/dashboard/stats',
+    getDashboardStats: builder.query<
+      any,
+      { officeId?: string; startDate?: string; endDate?: string }
+    >({
+      query: ({ officeId, startDate, endDate }) => ({
+        url: "/attendance/dashboard/stats",
         params: {
           officeId,
-          date,
+          startDate,
+          endDate,
         },
       }),
-      providesTags: ['Attendance'],
+      providesTags: ["Attendance"],
+    }),
+    updateAttendanceStatus: builder.mutation<
+      any,
+      { attendanceId: string; status: string }
+    >({
+      query: ({ attendanceId, status }) => ({
+        url: `/attendance/status/${attendanceId}`,
+        method: "PUT",
+        body: { status },
+      }),
+      invalidatesTags: ["Attendance"],
     }),
   }),
 });
@@ -61,4 +76,5 @@ export const {
   useGetAttendanceSummaryQuery,
   useAddAttendanceManualMutation,
   useGetDashboardStatsQuery,
+  useUpdateAttendanceStatusMutation,
 } = attendanceApi;

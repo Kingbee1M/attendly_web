@@ -14,7 +14,7 @@ import { useGetUsersParamsQuery } from "@/utils/APISlice/userApi";
 import { AiOutlineClose } from "react-icons/ai";
 import { toast } from "sonner";
 import { getErrorMessage } from "@/utils/getErrorMessage";
-import { format24hTo12h, parse12hTo24h } from "@/utils/timeUtils";
+import { format24hTo12h, parse12hTo24h, generateTimeOptions } from "@/utils/timeUtils";
 
 interface ShiftModalProps {
  isOpen: boolean;
@@ -24,6 +24,7 @@ interface ShiftModalProps {
 
 const ShiftModal = ({ isOpen, setIsOpen, officeId }: ShiftModalProps) => {
  console.log('ShiftModal: officeId =', officeId, 'isOpen =', isOpen);
+ const timeOptions = generateTimeOptions();
  const {
   data: shiftsData,
   isLoading: shiftsLoading,
@@ -62,14 +63,6 @@ const ShiftModal = ({ isOpen, setIsOpen, officeId }: ShiftModalProps) => {
   startTime: "",
   endTime: "",
  });
-
- // Helper functions to safely get time and period parts
- const getTimePart = (timeStr: string) => {
-  return timeStr.split(" ")[0] || "";
- };
- const getPeriodPart = (timeStr: string, defaultPeriod: string = "AM") => {
-  return timeStr.split(" ")[1] || defaultPeriod;
- };
 
  useEffect(() => {
   // Handle nested data structure: shiftsData.data.data
@@ -196,63 +189,29 @@ const ShiftModal = ({ isOpen, setIsOpen, officeId }: ShiftModalProps) => {
             placeholder="e.g. Morning Shift"
            />
           </div>
-          {/* Custom Start Time Input */}
+          {/* Start Time Dropdown */}
           <div className="md:col-span-2">
-           <label className="text-[#3A4050] font-medium text-[14px] leading-[21px] mb-[6px]">Start Time</label>
-           <div className="flex gap-2">
-            <input
-             type="text"
-             value={getTimePart(newShift.startTime)}
-             onChange={(e) => {
-              const newTime = e.target.value;
-              const currentPeriod = getPeriodPart(newShift.startTime, "AM");
-              setNewShift({ ...newShift, startTime: `${newTime} ${currentPeriod}` });
-             }}
-             placeholder="HH:MM"
-             className="custom-input-field flex-1 h-[40px] !border !border-[#E5E7EB] text-[#3A4050] text-[14px] leading-[21px] focus:outline-none focus:ring-1 focus:ring-[#2563EB] !rounded-none !pl-[16px] !pr-[16px] !py-[8px] bg-white"
-            />
-            <div className="w-[120px]">
-             <Dropdowns
-              label=""
-              options={["AM", "PM"]}
-              name="startPeriodAdd"
-              value={getPeriodPart(newShift.startTime, "AM")}
-              handleOnChange={(_name, value) => {
-               const currentTime = getTimePart(newShift.startTime);
-               setNewShift({ ...newShift, startTime: `${currentTime} ${value}` });
-              }}
-             />
-            </div>
-           </div>
+           <Dropdowns
+            label="Start Time"
+            options={timeOptions}
+            name="startTimeAdd"
+            value={newShift.startTime}
+            handleOnChange={(_name, value) => {
+             setNewShift({ ...newShift, startTime: value });
+            }}
+           />
           </div>
-          {/* Custom End Time Input */}
+          {/* End Time Dropdown */}
           <div className="md:col-span-2">
-           <label className="text-[#3A4050] font-medium text-[14px] leading-[21px] mb-[6px]">End Time</label>
-           <div className="flex gap-2">
-            <input
-             type="text"
-             value={getTimePart(newShift.endTime)}
-             onChange={(e) => {
-              const newTime = e.target.value;
-              const currentPeriod = getPeriodPart(newShift.endTime, "PM");
-              setNewShift({ ...newShift, endTime: `${newTime} ${currentPeriod}` });
-             }}
-             placeholder="HH:MM"
-             className="custom-input-field flex-1 h-[40px] !border !border-[#E5E7EB] text-[#3A4050] text-[14px] leading-[21px] focus:outline-none focus:ring-1 focus:ring-[#2563EB] !rounded-none !pl-[16px] !pr-[16px] !py-[8px] bg-white"
-            />
-            <div className="w-[120px]">
-             <Dropdowns
-              label=""
-              options={["AM", "PM"]}
-              name="endPeriodAdd"
-              value={getPeriodPart(newShift.endTime, "PM")}
-              handleOnChange={(_name, value) => {
-               const currentTime = getTimePart(newShift.endTime);
-               setNewShift({ ...newShift, endTime: `${currentTime} ${value}` });
-              }}
-             />
-            </div>
-           </div>
+           <Dropdowns
+            label="End Time"
+            options={timeOptions}
+            name="endTimeAdd"
+            value={newShift.endTime}
+            handleOnChange={(_name, value) => {
+             setNewShift({ ...newShift, endTime: value });
+            }}
+           />
           </div>
          </div>
          <button
@@ -300,63 +259,29 @@ const ShiftModal = ({ isOpen, setIsOpen, officeId }: ShiftModalProps) => {
                   label="Shift Name"
                  />
                 </div>
-                {/* Custom Start Time Input for Editing */}
+                {/* Start Time Dropdown for Editing */}
                 <div className="md:col-span-2">
-                 <label className="text-[#3A4050] font-medium text-[14px] leading-[21px] mb-[6px]">Start Time</label>
-                 <div className="flex gap-2">
-                  <input
-                   type="text"
-                   value={getTimePart(editingShiftData.startTime)}
-                   onChange={(e) => {
-                    const newTime = e.target.value;
-                    const currentPeriod = getPeriodPart(editingShiftData.startTime, "AM");
-                    setEditingShiftData({ ...editingShiftData, startTime: `${newTime} ${currentPeriod}` });
-                   }}
-                   placeholder="HH:MM"
-                   className="custom-input-field flex-1 h-[40px] !border !border-[#E5E7EB] text-[#3A4050] text-[14px] leading-[21px] focus:outline-none focus:ring-1 focus:ring-[#2563EB] !rounded-none !pl-[16px] !pr-[16px] !py-[8px] bg-white"
-                  />
-                  <div className="w-[120px]">
-                   <Dropdowns
-                    label=""
-                    options={["AM", "PM"]}
-                    name="startPeriodEdit"
-                    value={getPeriodPart(editingShiftData.startTime, "AM")}
-                    handleOnChange={(_name, value) => {
-                     const currentTime = getTimePart(editingShiftData.startTime);
-                     setEditingShiftData({ ...editingShiftData, startTime: `${currentTime} ${value}` });
-                    }}
-                   />
-                  </div>
-                 </div>
+                 <Dropdowns
+                  label="Start Time"
+                  options={timeOptions}
+                  name="startTimeEdit"
+                  value={editingShiftData.startTime}
+                  handleOnChange={(_name, value) => {
+                   setEditingShiftData({ ...editingShiftData, startTime: value });
+                  }}
+                 />
                 </div>
-                {/* Custom End Time Input for Editing */}
+                {/* End Time Dropdown for Editing */}
                 <div className="md:col-span-2">
-                 <label className="text-[#3A4050] font-medium text-[14px] leading-[21px] mb-[6px]">End Time</label>
-                 <div className="flex gap-2">
-                  <input
-                   type="text"
-                   value={getTimePart(editingShiftData.endTime)}
-                   onChange={(e) => {
-                    const newTime = e.target.value;
-                    const currentPeriod = getPeriodPart(editingShiftData.endTime, "PM");
-                    setEditingShiftData({ ...editingShiftData, endTime: `${newTime} ${currentPeriod}` });
-                   }}
-                   placeholder="HH:MM"
-                   className="custom-input-field flex-1 h-[40px] !border !border-[#E5E7EB] text-[#3A4050] text-[14px] leading-[21px] focus:outline-none focus:ring-1 focus:ring-[#2563EB] !rounded-none !pl-[16px] !pr-[16px] !py-[8px] bg-white"
-                  />
-                  <div className="w-[120px]">
-                   <Dropdowns
-                    label=""
-                    options={["AM", "PM"]}
-                    name="endPeriodEdit"
-                    value={getPeriodPart(editingShiftData.endTime, "PM")}
-                    handleOnChange={(_name, value) => {
-                     const currentTime = getTimePart(editingShiftData.endTime);
-                     setEditingShiftData({ ...editingShiftData, endTime: `${currentTime} ${value}` });
-                    }}
-                   />
-                  </div>
-                 </div>
+                 <Dropdowns
+                  label="End Time"
+                  options={timeOptions}
+                  name="endTimeEdit"
+                  value={editingShiftData.endTime}
+                  handleOnChange={(_name, value) => {
+                   setEditingShiftData({ ...editingShiftData, endTime: value });
+                  }}
+                 />
                 </div>
                </div>
                <div className="flex gap-2">
