@@ -104,8 +104,11 @@ const EmployeeDashBoard = () => {
 
 	const confirmManualClockIn = () => {
 		if (selectedUser) {
-			const status = getUserStatus(selectedUser.id);
-			const type = status === 'Absent' ? 'CHECK_IN' : 'CHECK_OUT';
+			const record = getUserAttendanceRecord(selectedUser.id);
+			// If there's no clock-in yet, this action is a CHECK_IN.
+			// If they've clocked in but not out, this action is a CHECK_OUT.
+			// If they've already clocked in AND out, treat the next action as a fresh CHECK_IN.
+			const type = !record?.clockIn || record?.clockOut ? 'CHECK_IN' : 'CHECK_OUT';
 			addAttendanceManual({
 				userId: selectedUser.id,
 				type,
@@ -129,8 +132,19 @@ const EmployeeDashBoard = () => {
 		}
 	};
 
-	const getStatus = (clockIn: string | null) => {
+	// Pull the raw attendance record for a user (or null if none today).
+	const getUserAttendanceRecord = (userId: string) => {
+		return Array.isArray(attendanceRecords)
+			? attendanceRecords.find((record: any) => record.userId === userId)
+			: null;
+	};
+
+	// Determine status from clockIn AND clockOut, not just clockIn.
+	const getStatus = (clockIn: string | null, clockOut?: string | null) => {
 		if (!clockIn) return 'Absent';
+
+		if (clockOut) return 'Clocked Out';
+
 		const clockInDate = new Date(clockIn);
 		const cutoffDate = new Date(clockInDate);
 		cutoffDate.setHours(8, 0, 0, 0);
@@ -138,10 +152,16 @@ const EmployeeDashBoard = () => {
 	};
 
 	const getUserStatus = (userId: string) => {
-		const attendanceRecord = Array.isArray(attendanceRecords)
-			? attendanceRecords.find((record: any) => record.userId === userId)
-			: null;
-		return getStatus(attendanceRecord?.clockIn || null);
+		const attendanceRecord = getUserAttendanceRecord(userId);
+		return getStatus(attendanceRecord?.clockIn || null, attendanceRecord?.clockOut || null);
+	};
+
+	// Button should only say "Clock Out" while someone is actively clocked in
+	// (i.e. has a clockIn but no clockOut yet). Everything else is "Clock In".
+	const getClockButtonLabel = (userId: string) => {
+		const record = getUserAttendanceRecord(userId);
+		const isActivelyClockedIn = !!record?.clockIn && !record?.clockOut;
+		return isActivelyClockedIn ? 'Clock Out' : 'Clock In';
 	};
 
 	const dataToRender = Array.isArray(users) ? [...users] : [];
@@ -237,7 +257,6 @@ const EmployeeDashBoard = () => {
 								<th>Gender</th>
 								<th>Phone</th>
 								<th>Status</th>
-								<th>Attendance</th>
 								<th>Shift</th>
 								<th>Designation</th>
 								<th>Email address</th>
@@ -247,17 +266,19 @@ const EmployeeDashBoard = () => {
 						</thead>
 						<tbody>
 							{isLoadingUsers ? (
-								<SVGLoaderFetch colSpan={11} />
+								<SVGLoaderFetch colSpan={10} />
 							) : dataToRender?.length === 0 ? (
-								<NoRecordFound colSpan={11}>No employee records found!</NoRecordFound>
+								<NoRecordFound colSpan={10}>No employee records found!</NoRecordFound>
 							) : (
 								dataToRender.map((user: any) => {
 									const status = getUserStatus(user.id);
+									const clockLabel = getClockButtonLabel(user.id);
 									const statusStyle = {
 										'On Time': 'bg-[#ECFDF3] border-[#ABEFC6] text-[#067647]',
 										Late: 'bg-[#FEF3F2] border-[#FECDCA] text-[#B42318]',
 										Absent: 'bg-[#FFFAF0] border-[#FEDF89] text-[#B54708]',
 										'On Leave': 'bg-[#F0F9FF] border-[#B9E6FE] text-[#026AA2]',
+										'Clocked Out': 'bg-[#F9FAFB] border-[#E5E7EB] text-[#3A4050]',
 										Unknown: 'bg-[#FEF2F2] border-[#FCA5A5] text-[#B91C1C]',
 									}[status] || 'bg-gray-100 text-gray-600';
 
@@ -267,9 +288,9 @@ const EmployeeDashBoard = () => {
 												<button
 													onClick={() => handleClockInClick(user)}
 													className="cursor-pointer flex flex-row justify-center items-center px-[6px] py-[4px] w-[70px] h-[22px] border font-medium text-[12px] leading-[18px] bg-[#EFF6FF] border-[#93C5FD] text-[#1D4ED8] hover:bg-[#DBEAFE] transition"
-													title={status === 'Absent' ? 'Clock In' : 'Clock Out'}
+													title={clockLabel}
 												>
-													<span className="mr-1">{status === 'Absent' ? 'Clock In' : 'Clock Out'}</span>
+													<span className="mr-1">{clockLabel}</span>
 													<svg xmlns="http://www.w3.org/2000/svg" className="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor">
 														<path d="M4 4a2 2 0 012-2h6a2 2 0 012 2v2h2a2 2 0 012 2v8a2 2 0 01-2 2h-6a2 2 0 01-2-2v-2H6a2 2 0 01-2-2V4z" />
 													</svg>
@@ -293,13 +314,6 @@ const EmployeeDashBoard = () => {
 														: user?.isActive === 'resigned' 
 														? 'Resigned' 
 														: 'Inactive'}
-												</div>
-											</td>
-											<td data-title="Attendance">
-												<div
-													className={`whitespace-nowrap flex flex-row justify-center items-center px-[6px] py-[4px] w-[60px] h-[22px] border font-medium text-[12px] leading-[18px] ${statusStyle}`}
-												>
-													{status}
 												</div>
 											</td>
 											<td>
@@ -350,7 +364,7 @@ const EmployeeDashBoard = () => {
 				onClose={() => setIsClockInModalOpen(false)}
 				onConfirm={confirmManualClockIn}
 				isLoadingAttendance={isLoadingAttendance}
-				type={selectedUser ? (getUserStatus(selectedUser.id) === 'Absent' ? 'CHECK_IN' : 'CHECK_OUT') : 'CHECK_IN'}
+				type={selectedUser ? (getClockButtonLabel(selectedUser.id) === 'Clock In' ? 'CHECK_IN' : 'CHECK_OUT') : 'CHECK_IN'}
 			/>
 
 			<AddEmployeeModal isOpen={isOpen} setIsOpen={setIsOpen} />

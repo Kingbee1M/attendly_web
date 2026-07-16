@@ -25,6 +25,8 @@ const SideNav: React.FC = () => {
     { label: "Attendance", icon: time, iconWhite: timeWhite, path: "/attendances", restricted: true },
     { label: "Summary", icon: time, iconWhite: timeWhite, path: "/attendancesummary", restricted: true },
     { label: "Office Location", icon: employee, iconWhite: employeeWhite, path: "/officelocation", restricted: true },
+    { label: "Leave", icon: employee, iconWhite: employeeWhite, path: "/officelocation", restricted: true },
+
   ];
 
   const visibleMenuItems = menuItems.filter(item => {
