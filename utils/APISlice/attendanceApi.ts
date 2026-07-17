@@ -21,19 +21,20 @@ export const attendanceApi = baseApi.injectEndpoints({
       }),
       providesTags: ["Attendance"],
     }),
-    getAttendanceSummary: builder.query<any, { id?: string; params: any }>({
-      query: ({ id, params }) => ({
-        url: id ? `/attendance/summary/${id}` : "/attendance/summary",
-        params: {
-          page: params.page,
-          limit: params.limit,
-          filterByDate: params.filterByDate,
-          startDate: params.startDate,
-          endDate: params.endDate,
-          search: params.search,
-        },
-      }),
-    }),
+ getAttendanceSummary: builder.query<any, { id?: string; params: any }>({
+  query: ({ id, params }) => ({
+    url: id ? `/attendance/summary/${id}` : "/attendance/summary",
+    params: {
+      page: params.page,
+      limit: params.limit,
+      filterByDate: params.filterByDate,
+      startDate: params.startDate,
+      endDate: params.endDate,
+      search: params.search,
+      status: params.status,
+    },
+  }),
+}),
     addAttendanceManual: builder.mutation<any, any>({
       query: (body) => ({
         url: "/attendance/manual",

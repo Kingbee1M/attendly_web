@@ -190,7 +190,7 @@ const WorkScheduleModal = ({ isOpen, setIsOpen }: WorkScheduleModalProps) => {
 
           <div className="fixed inset-0 z-50 flex items-center justify-center">
             <div className="bg-white w-[700px] max-w-[95vw] rounded shadow-xl">
-              <div className="p-6 border-b flex justify-between">
+              <div className="p-6 border border-gray-300 flex justify-between">
                 <h3 className="font-semibold text-lg">Work Schedule</h3>
 
                 <button
@@ -219,11 +219,11 @@ const WorkScheduleModal = ({ isOpen, setIsOpen }: WorkScheduleModalProps) => {
                     placeholder={
                       usersLoading ? "Loading..." : "Search employee..."
                     }
-                    className="border p-3 rounded w-full"
+                    className="border border-gray-300 p-3 rounded w-full"
                   />
 
                   {showDropdown && (
-                    <div className="absolute z-10 top-full left-0 right-0 mt-1 bg-white border rounded shadow-lg max-h-[220px] overflow-y-auto">
+                    <div className="absolute z-10 top-full left-0 right-0 mt-1 bg-white border border-gray-300 rounded shadow-lg max-h-[220px] overflow-y-auto">
                       {filteredUsers.length === 0 ? (
                         <div className="p-3 text-sm text-gray-500">
                           No employees found
@@ -247,7 +247,7 @@ const WorkScheduleModal = ({ isOpen, setIsOpen }: WorkScheduleModalProps) => {
                   )}
                 </div>
 
-                <div className="flex border rounded overflow-hidden">
+                <div className="flex border border-gray-300 rounded overflow-hidden">
                   <button
                     className={`flex-1 py-3 transition-colors ${
                       mode === "PRESENT"
@@ -276,7 +276,7 @@ const WorkScheduleModal = ({ isOpen, setIsOpen }: WorkScheduleModalProps) => {
                     <button
                       key={day}
                       onClick={() => toggleDay(day)}
-                      className={`border py-2 rounded transition-colors ${
+                      className={`border border-gray-300 py-2 rounded transition-colors ${
                         (mode === "PRESENT" ? presentDays : wfhDays).includes(
                           day
                         )
@@ -312,7 +312,7 @@ const WorkScheduleModal = ({ isOpen, setIsOpen }: WorkScheduleModalProps) => {
                 </button>
               </div>
 
-              <div className="p-6 border-t flex justify-end">
+              <div className="p-6 flex justify-end">
                 <button
                   className="btn_model_outline"
                   onClick={() => {

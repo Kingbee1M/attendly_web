@@ -61,8 +61,6 @@ const AttendanceSummary = () => {
 
 	const dataToRender: any = Array.isArray(attendanceSummary) ? [...attendanceSummary] : [];
 
-	console.log("attendanceSummary", attendanceSummary);
-
 	const handleAttendanceParams = async ({ page, limit, filterByDate, startDate, endDate }: any) => {
 		setCurrentPage(page);
 		setLimit(limit);
@@ -100,7 +98,30 @@ const AttendanceSummary = () => {
 			handleAttendanceParams({ page, limit });
 		}
 	};
-	const getClockInStatus = (clockIn: string | null): string => {
+
+	
+	const getClockInStatus = (clockIn: string | null, backendStatus?: string | null): string => {
+		switch (backendStatus) {
+			case "WFH":
+				return "WFH";
+			case "ON_LEAVE":
+				return "On Leave";
+			case "ABSENT":
+				return "Absent";
+			case "NOT_AVAILABLE":
+				return "Not Scheduled";
+			case "NOT_CLOCKED_IN":
+				return "Not Clocked In";
+			case "EARLY":
+			case "ON_TIME":
+				return "On Time";
+			case "LATE":
+				return "Late";
+			case "TRAVELED":
+				return "Traveled";
+		}
+
+		
 		if (!clockIn) return "Absent";
 
 		const clockInTime = new Date(clockIn);
@@ -209,6 +230,7 @@ const AttendanceSummary = () => {
 								const attendanceData = record?.attendance?.[0] || record || {};
 								const clockIn = attendanceData.clockIn;
 								const clockOut = attendanceData.clockOut;
+								const dayInfo = record?.days?.[0];
 
 								const checkIn = clockIn
 									? new Date(clockIn).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
@@ -225,7 +247,14 @@ const AttendanceSummary = () => {
 										month: 'short',
 										day: 'numeric'
 									})
-									: '—';
+									: dayInfo?.date
+										? new Date(dayInfo.date).toLocaleDateString(undefined, {
+											weekday: 'short',
+											year: 'numeric',
+											month: 'short',
+											day: 'numeric'
+										})
+										: '—';
 
 								const totalHour = clockIn && clockOut
 									? (
@@ -239,7 +268,7 @@ const AttendanceSummary = () => {
 								const employeeEmail = record?.email || record?.user?.email || '—';
 								const officeLocation = record?.office?.name || '—';
 								const officeAddress = record?.office?.address || '—';
-								const status = getClockInStatus(clockIn);
+								const status = getClockInStatus(clockIn, record?.status ?? dayInfo?.status);
 
 								return (
 									<tr key={record.id}>
@@ -261,7 +290,13 @@ const AttendanceSummary = () => {
 															? 'bg-[#FEF3F2] border-[#FECDCA] text-[#B42318]'
 															: status === 'Absent'
 																? 'bg-[#FFFAF0] border-[#FEDF89] text-[#B54708]'
-																: 'bg-[#FEF2F2] border-[#FCA5A5] text-[#B91C1C]'
+																: status === 'WFH'
+																	? 'bg-[#EFF6FF] border-[#BFDBFE] text-[#1D4ED8]'
+																	: status === 'On Leave'
+																		? 'bg-[#F5F3FF] border-[#DDD6FE] text-[#6D28D9]'
+																		: status === 'Not Scheduled'
+																			? 'bg-[#F3F4F6] border-[#E5E7EB] text-[#6B7280]'
+																			: 'bg-[#FEF2F2] border-[#FCA5A5] text-[#B91C1C]'
 													}`}
 											>
 												{status}
