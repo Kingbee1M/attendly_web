@@ -21,6 +21,7 @@ export const baseApi = createApi({
     "OfficeLocation",
     "Shift",
     "WorkSchedule",
+    "LeaveRequest",
   ],
   endpoints: () => ({}),
 });

@@ -2,13 +2,11 @@ import { baseApi } from "./baseApi";
 
 export const workScheduleApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
-    
     getWorkSchedules: builder.query<any, void>({
       query: () => "/work-schedules",
       providesTags: ["WorkSchedule"],
     }),
 
-    
     getUserWorkSchedules: builder.query<any, string>({
       query: (userId) => `/work-schedules/user/${userId}`,
       providesTags: ["WorkSchedule"],
@@ -21,25 +19,34 @@ export const workScheduleApi = baseApi.injectEndpoints({
 
     createWorkSchedule: builder.mutation<any, any>({
       query: (body) => ({
-        url: "/work-schedules",
+        url: Array.isArray(body.userIds)
+          ? "/work-schedules/bulk"
+          : "/work-schedules",
         method: "POST",
         body,
       }),
       invalidatesTags: ["WorkSchedule"],
     }),
 
+    
     updateWorkSchedule: builder.mutation<
       any,
       {
-        scheduleId: string;
+        scheduleId?: string;
         body: any;
       }
     >({
-      query: ({ scheduleId, body }) => ({
-        url: `/work-schedules/${scheduleId}`,
-        method: "PATCH",
-        body,
-      }),
+      query: ({ scheduleId, body }) => {
+        const isBulk = Array.isArray(body.userIds);
+
+        return {
+          url: isBulk
+            ? "/work-schedules/bulk"
+            : `/work-schedules/${scheduleId}`,
+          method: "PATCH",
+          body,
+        };
+      },
       invalidatesTags: ["WorkSchedule"],
     }),
 

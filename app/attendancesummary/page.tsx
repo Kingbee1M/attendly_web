@@ -293,7 +293,7 @@ const AttendanceSummary = () => {
 																: status === 'WFH'
 																	? 'bg-[#EFF6FF] border-[#BFDBFE] text-[#1D4ED8]'
 																	: status === 'On Leave'
-																		? 'bg-[#F5F3FF] border-[#DDD6FE] text-[#6D28D9]'
+																		? 'bg-[#F5F3FF] border-[#DDD6FE] text-[#7e3ce9]'
 																		: status === 'Not Scheduled'
 																			? 'bg-[#F3F4F6] border-[#E5E7EB] text-[#6B7280]'
 																			: 'bg-[#FEF2F2] border-[#FCA5A5] text-[#B91C1C]'
