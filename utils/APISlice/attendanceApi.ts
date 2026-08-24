@@ -68,6 +68,14 @@ export const attendanceApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ["Attendance"],
     }),
+    
+    resetUserDevice: builder.mutation<any, { userId: string }>({
+      query: ({ userId }) => ({
+        url: `/attendance/${userId}/reset-device`,
+        method: "POST",
+      }),
+      invalidatesTags: ["Attendance"],
+    }),
   }),
 });
 
@@ -78,4 +86,5 @@ export const {
   useAddAttendanceManualMutation,
   useGetDashboardStatsQuery,
   useUpdateAttendanceStatusMutation,
+  useResetUserDeviceMutation,
 } = attendanceApi;

@@ -1,12 +1,20 @@
 import { baseApi } from './baseApi';
 
+export interface OfficeLocationPayload {
+  name: string;
+  address: string;
+  latitude: number;
+  longitude: number;
+  radius: number;
+}
+
 export const officeLocationApi = baseApi.injectEndpoints({
   endpoints: (builder) => ({
     getOfficeLocations: builder.query<any, void>({
       query: () => '/office-location',
       providesTags: ['OfficeLocation'],
     }),
-    addOfficeLocation: builder.mutation<any, { name: string; address: string }>({
+    addOfficeLocation: builder.mutation<any, OfficeLocationPayload>({
       query: (body) => ({
         url: '/office-location',
         method: 'POST',
@@ -14,7 +22,7 @@ export const officeLocationApi = baseApi.injectEndpoints({
       }),
       invalidatesTags: ['OfficeLocation'],
     }),
-    updateOfficeLocation: builder.mutation<any, { id: string; body: any }>({
+    updateOfficeLocation: builder.mutation<any, { id: string; body: Partial<OfficeLocationPayload> }>({
       query: ({ id, body }) => ({
         url: `/office-location/${id}`,
         method: 'PATCH',

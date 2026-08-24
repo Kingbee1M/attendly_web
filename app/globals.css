@@ -1,4 +1,3 @@
- 
 @import url(../css/login.css);
 @import url(../css/header.css);
 @import url(../css/SideNav.css);
@@ -6,6 +5,7 @@
 @import url(../css/footer.css);
 @import url(../css/Form.css);
 @import url(../css/button.css);
+@import "leaflet/dist/leaflet.css";
  
 
  
