@@ -3,7 +3,9 @@
   "name": "Attendly",
   "theme": "mint",
   "colors": {
-    "primary": "#2563EB"
+    "primary": "#2563EB",
+    "light": "#3B82F6",
+    "dark": "#1D4ED8"
   },
   "navigation": {
     "tabs": [
@@ -24,5 +26,36 @@
         ]
       }
     ]
+  },
+  "icons": {
+    "library": "fontawesome"
+  },
+  "background": {
+    "decoration": "gradient"
+  },
+  "logo": {
+    "light": "/app/favicon.ico",
+    "dark": "/app/favicon.ico"
+  },
+  "favicon": {
+    "light": "/app/favicon.ico",
+    "dark": "/app/favicon.ico"
+  },
+  "fonts": {
+    "body": {
+      "family": "Montserrat",
+      "weight": 400
+    }
+  },
+  "navbar": {
+    "links": [
+      {
+        "href": "mailto:hi@mintlify.com",
+        "label": "Support"
+      }
+    ]
+  },
+  "banner": {
+    "content": "Attendly Documentation"
   }
 }
