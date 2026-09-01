@@ -37,10 +37,6 @@
     "light": "/app/favicon.ico",
     "dark": "/app/favicon.ico"
   },
-  "favicon": {
-    "light": "/app/favicon.ico",
-    "dark": "/app/favicon.ico"
-  },
   "fonts": {
     "body": {
       "family": "Montserrat",
