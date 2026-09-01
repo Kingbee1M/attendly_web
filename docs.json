@@ -8,9 +8,9 @@
     "dark": "#1D4ED8"
   },
   "navigation": {
-    "tabs": [
+    "anchors": [
       {
-        "tab": "Documentation",
+        "anchor": "Documentation",
         "groups": [
           {
             "group": "Web Platform",
