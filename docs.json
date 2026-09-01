@@ -1,21 +1,36 @@
 {
   "$schema": "https://mintlify.com/docs.json",
-  "name": "Attendly Documentation",
+  "name": "Attendly",
   "theme": "mint",
   "colors": {
-    "primary": "#2563EB"
+    "primary": "#2563EB",
+    "light": "#3B82F6",
+    "dark": "#1D4ED8",
+    "background": {
+      "light": "#FFFFFF",
+      "dark": "#0F172A"
+    }
+  },
+  "topbarCtaButton": {
+    "name": "Back to App",
+    "url": "https://your-app-url.com"
   },
   "navigation": {
-    "groups": [
+    "tabs": [
       {
-        "group": "WEB",
-        "pages": [
-          "untitled-page",
-          "untitled-page-2",
-          "untitled-page-3",
-          "untitled-page-4",
-          "untitled-page-5",
-          "untitled-page-6"
+        "tab": "Documentation",
+        "groups": [
+          {
+            "group": "Web Platform",
+            "pages": [
+              "dashboard",
+              "employee-management",
+              "attendance",
+              "attendance-summary",
+              "office-location",
+              "leave-requests"
+            ]
+          }
         ]
       }
     ]
