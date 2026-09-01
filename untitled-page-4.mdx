@@ -1,0 +1,55 @@
+---
+title: "Attendance Summary"
+---
+
+# Attendance Summary Documentation
+
+The **Summary** page provides a consolidated view of employee attendance across all company locations, displaying both detailed workplace metadata and real-time shift status entries.
+
+> **Note:** The Attendly admin portal is designed with a standard light interface mode.
+
+---
+
+## Attendance Summary Directory Overview
+
+{/*  IMAGE PLACEHOLDER 1: Main Attendance Summary Table View  */}
+
+![Screenshot 2026 09 01 084333](/images/Screenshot-2026-09-01-084333.png "Screenshot 2026 09 01 084333")
+
+Unlike the basic Attendance log, the **Attendance Summary** view incorporates location-specific details (Office Location and Office Address) alongside standard time tracking data to give administrators broader contextual visibility.
+
+### Summary Directory Columns
+
+| Column | Description |
+| :-- | :-- |
+| **Full Name** | Legal first and last name of the employee. |
+| **Email** | Registered work/contact email address. |
+| **Office Location** | Designated branch or region name (e.g., _South East_, _Oyo West_, _Opebi Location_). |
+| **Office Address** | Street address or landmark of the assigned work site. |
+| **Date** | Specific calendar date of the entry formatted with day and year (e.g., _Tue, Sep 1, 2026_). |
+| **Check In** | Timestamp logged upon shift entry (`—` indicates no log recorded). |
+| **Check Out** | Timestamp logged upon shift departure (`—` indicates no log recorded). |
+| **Total Hour** | Total calculated working duration for completed shifts. |
+| **Status** | System schedule status badge (e.g., `Not Scheduled`, `Late`, `On Time`). |
+
+---
+
+## Data Export
+
+Click the **Export** button located at the top right of the screen to download the currently displayed attendance summary records as a `.csv` file for offline reporting, record keeping, or payroll processing.
+
+---
+
+## Searching, Filtering & Page Navigation
+
+{/*  IMAGE PLACEHOLDER 2: Attendance Summary Filter Panel Popover  */}
+
+![Screenshot 2026 09 01 084342](/images/Screenshot-2026-09-01-084342.png "Screenshot 2026 09 01 084342")
+
+- **Search Bar:** Quickly locate specific records by typing an employee's name into the search field.
+- **Location Dropdown Selector:** Filter entries system-wide or isolate specific branches using the **All Locations** dropdown.
+- **Advanced Filter Controls:** Click **Filter** to expand the query popover panel:
+  - **Start Date / End Date:** Filter summary entries within a designated start and end date range.
+  - **Limit:** Set the maximum number of summary records per page (default is `10`).
+  - Click **Filters** to update the summary view.
+- **Pagination Summary:** Track overall record counts via the bottom summary footer (e.g., _Total 10 of 434 Attendance Summary_) and cycle through result pages using page numbers.

@@ -6,18 +6,16 @@
     "primary": "#2563EB"
   },
   "navigation": {
-    "tabs": [
+    "groups": [
       {
-        "tab": "Documentation",
-        "groups": [
-          {
-            "group": "Admin Guide",
-            "pages": [
-              "summary",
-              "office-location",
-              "leave-requests"
-            ]
-          }
+        "group": "WEB",
+        "pages": [
+          "untitled-page",
+          "untitled-page-2",
+          "untitled-page-3",
+          "untitled-page-4",
+          "untitled-page-5",
+          "untitled-page-6"
         ]
       }
     ]

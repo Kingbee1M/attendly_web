@@ -1,0 +1,71 @@
+---
+title: "Dashboard"
+---
+
+# Attendly Dashboard Documentation
+
+The **Dashboard Overview** serves as the central hub for monitoring real-time employee attendance, generating access QR codes, and filtering attendance data across work locations and timeframes.
+
+> **Note:** The Attendly admin portal is designed with a standard light interface interface mode.
+
+---
+
+## Dashboard Overview & Key Metrics
+
+{/*  IMAGE PLACEHOLDER 1: Main Dashboard Overview showing metric cards and attendance table  */}
+
+![Screenshot 2026 09 01 082200](/images/Screenshot-2026-09-01-082200.png "Screenshot 2026 09 01 082200")
+
+The dashboard provides four main cards displaying real-time statistics based on the selected filters:
+
+- **Total Employees:** Displays the total count of active employees who have clocked in for the selected period.
+- **Absent Today:** Shows the number of employees who have not logged attendance for the current workday.
+- **Early Arrivals:** Tracks the number of staff members who clocked in before their scheduled start time.
+- **Late Arrivals:** Highlights employees who clocked in after the designated start time threshold.
+
+---
+
+## QR Code Generation & Clock Actions
+
+{/*  IMAGE PLACEHOLDER 2: Clock Type Dropdown Menu (CHECK_IN / CHECK_OUT)  */}
+
+![Screenshot 2026 09 01 082253](/images/Screenshot-2026-09-01-082253.png "Screenshot 2026 09 01 082253")
+
+Located on the top right of the dashboard panel:
+
+1. **Clock Type Selector:** A dropdown menu allowing administrators to switch between two actions:
+   - `CHECK_IN` – Generates a static/dynamic QR code for incoming employees.
+   - `CHECK_OUT` – Switches the QR code mode to record employee sign-outs.
+2. **Create Button:** Generates or updates the active QR code container based on the selected clock type.
+3. **QR Code Container:** Displays the generated code scanned by team members via mobile/device scanners to complete attendance logs.
+
+---
+
+## Data & Location Filters
+
+{/*  IMAGE PLACEHOLDER 3: Office Location Selection Filter Dropdown  */}
+
+![Screenshot 2026 09 01 082616](/images/Screenshot-2026-09-01-082616.png "Screenshot 2026 09 01 082616")
+
+Administrators can customize the displayed metrics and tables using the quick-filter bar:
+
+- **Timeframe Filters:** Easily toggle views between `Today`, `Yesterday`, `Last Week`, and `Last Month`.
+- **Location Filter:** Filter system-wide data by specific office locations (e.g., _Ile Ife Shop Mayfair_, _Ile Ife Osun State_, _South East_, _AKWA IBOM_) or select `All Locations` for a consolidated report.
+
+---
+
+## Attendance List Table
+
+The **Attendance List** provides an itemized log of recent employee records:
+
+| Column | Description |
+| :-- | :-- |
+| **Name** | Full name of the employee. |
+| **Day** | The day of the week the entry was logged. |
+| **Check In** | Exact timestamp when the employee clocked in. |
+| **Check Out** | Timestamp of departure (`—` indicates an active shift). |
+| **Total Hour** | Calculated working hours for completed shifts. |
+| **Status** | Punctuality tag assigned by system rules (e.g., `Late`, `On Time`). |
+
+- **View All:** Click to navigate to the full attendance repository.
+- **Date Picker Indicator:** A calendar toggle to inspect historical records for specific custom dates.

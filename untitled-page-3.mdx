@@ -1,0 +1,57 @@
+---
+title: "Attendance Page"
+---
+
+# Page Title: Attendance Tracking
+
+# Page Description: Detailed guide for monitoring daily clock-in/clock-out logs, filtering historical attendance, and exporting report data in CSV format within Attendly.
+
+# Attendance Documentation
+
+The **Attendance** module provides a central log for monitoring daily check-ins, check-outs, and calculated shift durations across all workforce locations.
+
+> **Note:** The Attendly portal operates in standard light mode.
+
+---
+
+## Attendance Directory Overview
+
+{/*  IMAGE PLACEHOLDER 1: Main Attendance Table View  */}
+
+![Screenshot 2026 09 01 084042](/images/Screenshot-2026-09-01-084042.png "Screenshot 2026 09 01 084042")
+
+The main attendance table displays time logs sorted chronologically, giving administrators complete visibility into daily shift start times, end times, and overall punctuality.
+
+### Table Columns
+
+| Column | Description |
+| :-- | :-- |
+| **Employee Name** | Full name of the employee logging the shift. |
+| **Email** | Registered email address of the employee. |
+| **Day** | Day of the week the shift occurred. |
+| **Check In** | Exact clock-in timestamp logged by the system. |
+| **Check Out** | Exact clock-out timestamp (`—` indicates an ongoing shift). |
+| **Total Hour** | Total elapsed work duration for completed shifts. |
+| **Status** | System-assigned punctuality badge (e.g., `Late`, `On Time`). |
+
+---
+
+## Data Export
+
+Click the **Export** button located at the top right of the panel to instantly download the currently filtered attendance logs as a `.csv` file. This report can be imported directly into external payroll or HR software.
+
+---
+
+## Filtering, Searching & Pagination
+
+{/*  IMAGE PLACEHOLDER 2: Attendance Filter Panel Drawer  */}
+
+![Screenshot 2026 09 01 084052](/images/Screenshot-2026-09-01-084052.png "Screenshot 2026 09 01 084052")
+
+- **Search Input:** Search records by entering an employee's name or keyword into the search bar.
+- **Location Selector Dropdown:** Limit results to a specific office location or select `All Locations` for system-wide records.
+- **Advanced Filter Panel:** Click **Filter** to open date and limit controls:
+  - **Start Date / End Date:** Constrain attendance records to a specific date window.
+  - **Limit:** Specify the number of rows rendered per page (e.g., `10`).
+  - Click **Filters** to apply choices.
+- **Pagination Controls:** Navigate multi-page records using the numerical page numbers or the **Previous** and **Next** buttons at the bottom of the table.
