@@ -2,24 +2,8 @@
   "$schema": "https://mintlify.com/docs.json",
   "name": "Attendly",
   "theme": "mint",
-  "logo": {
-    "light": "/logo/light.svg",
-    "dark": "/logo/dark.svg"
-  },
   "colors": {
-    "primary": "#2563EB",
-    "light": "#3B82F6",
-    "dark": "#1D4ED8"
-  },
-  "topbarLinks": [
-    {
-      "name": "Support",
-      "url": "mailto:support@attendly.com"
-    }
-  ],
-  "topbarCtaButton": {
-    "name": "Dashboard",
-    "url": "https://your-attendly-app.com"
+    "primary": "#2563EB"
   },
   "navigation": {
     "tabs": [
