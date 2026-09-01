@@ -1,0 +1,15 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "name": "Attendly Documentation",
+  "colors": {
+    "primary": "#2563EB"
+  },
+  "navigation": [
+    {
+      "group": "Documentation",
+      "pages": [
+        "index"
+      ]
+    }
+  ]
+}
