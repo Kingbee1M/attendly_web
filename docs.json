@@ -33,10 +33,6 @@
   "background": {
     "decoration": "gradient"
   },
-  "logo": {
-    "light": "/app/favicon.ico",
-    "dark": "/app/favicon.ico"
-  },
   "fonts": {
     "body": {
       "family": "Montserrat",
