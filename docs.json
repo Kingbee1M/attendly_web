@@ -2,14 +2,24 @@
   "$schema": "https://mintlify.com/docs.json",
   "name": "Attendly",
   "theme": "mint",
+  "logo": {
+    "light": "/logo/light.svg",
+    "dark": "/logo/dark.svg"
+  },
   "colors": {
     "primary": "#2563EB",
     "light": "#3B82F6",
     "dark": "#1D4ED8"
   },
+  "topbarLinks": [
+    {
+      "name": "Support",
+      "url": "mailto:support@attendly.com"
+    }
+  ],
   "topbarCtaButton": {
-    "name": "Back to App",
-    "url": "https://your-app-url.com"
+    "name": "Dashboard",
+    "url": "https://your-attendly-app.com"
   },
   "navigation": {
     "tabs": [
@@ -22,8 +32,8 @@
               "Dashboard",
               "Employee Management",
               "Attendance Page",
-              "Office Location Management",
               "Attendance Summary",
+              "Office Location Management",
               "Leave Requests Management"
             ]
           }
