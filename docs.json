@@ -19,12 +19,12 @@
           {
             "group": "Web Platform",
             "pages": [
-              "dashboard",
-              "employee-management",
-              "attendance",
-              "attendance-summary",
-              "office-location",
-              "leave-requests"
+              "Dashboard",
+              "Employee Management",
+              "Attendance Page",
+              "Attendance Summary",
+              "Office Location Management",
+              "Leave Requests Management"
             ]
           }
         ]
