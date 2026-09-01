@@ -1,0 +1,109 @@
+---
+title: "Office Location Management"
+---
+
+The **Office Location** section enables administrators to create and manage office branches, define working shifts, schedule employees, and configure GPS geofencing boundaries required for clocking in.
+
+> **Note:** Location Access Restriction — Admins assigned to specific branches will only see and manage the office locations tied to their administrator account.
+
+---
+
+## Office Location Directory Overview
+
+{/* IMAGE PLACEHOLDER 1: Main Office Location Table View */}
+
+![Screenshot 2026 09 01 084659](/images/Screenshot-2026-09-01-084659.png "Screenshot 2026 09 01 084659")
+
+The main office directory displays all available branches along with action buttons to configure work parameters:
+
+- **Copy ID:** Instantly copies the unique office identification key to the clipboard.
+- **Search Input:** Search office locations by name or address details.
+- **Create Office / Reset Device:** Actions to add new branch entries or manage device pairings.
+
+| Column | Description |
+| :-- | :-- |
+| **Name** | Designated branch name (e.g., _Ile Ife Shop Mayfair_, _AKWA IBOM_, _Lagos_). |
+| **Address** | Physical street address or landmark location of the office. |
+| **Created At / Updated At** | System timestamps for record creation and last modification. |
+| **Manage Shifts** | Opens the shift creation and agent assignment panel. |
+| **Manage Work Schedule** | Opens shift roster scheduling for single or bulk employees. |
+| **Action (Update)** | Opens the office configuration modal with map positioning and geofencing. |
+
+---
+
+## Managing Shifts & Agent Assignments
+
+<Tabs>
+  <Tab title="Start Time Dropdown">
+    {/* IMAGE PLACEHOLDER 2: Manage Shifts Start Time View */}
+
+    ![Start Time Dropdown](/images/Screenshot-2026-09-01-084822.png "Start Time Dropdown")
+  </Tab>
+  <Tab title="End Time Dropdown">
+    {/* IMAGE PLACEHOLDER 3: Manage Shifts End Time View */}
+
+    ![End Time Dropdown](/images/Screenshot-2026-09-01-084827.png "End Time Dropdown")
+  </Tab>
+  <Tab title="Assign Users">
+    {/* IMAGE PLACEHOLDER 4: Manage Shifts User Assignment View */}
+
+    ![Screenshot 2026 09 01 084832](/images/Screenshot-2026-09-01-084832.png "Screenshot 2026 09 01 084832")
+  </Tab>
+</Tabs>
+
+Click **Manage Shifts** on any office row to create work shifts and assign local employees:
+
+1. **Add New Shift:**
+   - **Shift Name:** Enter a descriptive label (e.g., _Morning_).
+   - **Start Time / End Time:** Select shift operating hours using the 30-minute increment dropdowns (e.g., `07:30 AM - 05:00 PM`).
+   - Click **Add Shift** to save the shift definition.
+2. **Existing Shifts & User Assignment:**
+   - View created shifts for the location.
+   - Click on available employees listed under **Assign Users** to toggle their assignment (`Assigned` status tags indicate active shift membership).
+   - Edit or delete existing shift parameters as needed.
+
+---
+
+## Work Schedule Setup
+
+{/* IMAGE PLACEHOLDER 5: Work Schedule Modal */}
+
+![Work Schedule Setup](/images/Screenshot-2026-09-01-084914.png "Work Schedule Setup Modal")
+
+Click **Manage Work Schedule** to build daily attendance rosters:
+
+1. **Toggle Mode:** Choose between **Single Employee** or **Bulk Employees** setup.
+2. **Employee Selection:** Search and select the target agent(s).
+3. **Attendance Type:** Select **PRESENT** (in-office required) or **WFH** (Work From Home).
+4. **Day Picker:** Select applicable working days (e.g., `MON`, `TUE`, `WED`, `THU`, `FRI`).
+5. **Effective Date:** Pick the starting calendar date for the schedule rule.
+6. Click **Create PRESENT Schedule** (or WFH Schedule) to apply.
+
+---
+
+## Office Geofencing & Map Location Setup
+
+<Tabs>
+  <Tab title="Map Positioning">
+    {/* IMAGE PLACEHOLDER 6: Update Office Location Map Modal */}
+
+    ![Update Office Location Map](/images/Screenshot-2026-09-01-084957.png "Update Office Location Map Modal")
+  </Tab>
+  <Tab title="Geofence Radius">
+    {/* IMAGE PLACEHOLDER 7: Geofence Radius Slider and Coordinates */}
+
+    ![Geofence Radius Slider](/images/Screenshot-2026-09-01-085003.png "Geofence Radius Slider and Coordinates")
+  </Tab>
+</Tabs>
+
+Click the **Update** button on an office entry to configure map position and clock-in radius:
+
+1. **Office Name & Address:** Enter or update the physical address details manually.
+2. **Location Positioning:**
+   - **Search Bar:** Type an address or landmark (e.g., _Ikeja City Mall_) to auto-locate on the map.
+   - **My Location Button:** Click **My Location** to auto-detect and pinpoint your current GPS position.
+   - **Map Pin / Coordinates:** Fine-tune position by dragging the pin directly on the interactive map or manually entering exact **Latitude** and **Longitude** values.
+3. **Geofence Radius Slider:**
+   - Adjust the slider to set the **Geofence Radius** (measured in meters, e.g., `390 meters`).
+   - The blue circle visualizer on the map indicates the exact sphere of influence within which employees are permitted to clock in via the Attendly mobile app.
+4. Click **Update Office** to save location and geofence settings.
