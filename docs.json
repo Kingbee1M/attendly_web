@@ -33,12 +33,6 @@
   "background": {
     "decoration": "gradient"
   },
-  "fonts": {
-    "body": {
-      "family": "Montserrat",
-      "weight": 400
-    }
-  },
   "navbar": {
     "links": [
       {
@@ -47,7 +41,11 @@
       }
     ]
   },
-  "banner": {
-    "content": "Attendly Documentation"
+  "footer": {
+    "socials": {
+      "github": "https://github.com/mintlify",
+      "x": "https://x.com/mintlify",
+      "linkedin": "https://linkedin.com/company/mintlify"
+    }
   }
 }
