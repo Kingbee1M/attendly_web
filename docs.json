@@ -1,7 +1,7 @@
 {
   "$schema": "https://mintlify.com/docs.json",
   "name": "Attendly",
-  "theme": "mint",
+  "theme": "palm",
   "colors": {
     "primary": "#2563EB",
     "light": "#3B82F6",
@@ -29,9 +29,6 @@
   },
   "icons": {
     "library": "fontawesome"
-  },
-  "background": {
-    "decoration": "windows"
   },
   "navbar": {
     "links": [
