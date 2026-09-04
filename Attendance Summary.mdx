@@ -2,22 +2,23 @@
 title: "Office Location & Geofencing Management"
 ---
 
-The **Office Location** section enables administrators to create and manage office branches, define working shifts, schedule employees, and configure GPS geofencing boundaries required for clocking in.
+The **Office Location** section enables administrators to create and manage office branches, define working shifts, schedule employees, configure GPS geofencing boundaries, and assign administrators to specific office locations.
 
-> **Note:** Location Access Restriction — Admins assigned to specific branches will only see and manage the office locations tied to their administrator account.
+<Note>
+  **Location Access Restriction:** Admins assigned to specific branches will only see and manage the office locations tied to their administrator account. Super Administrators can assign single or multiple offices to any admin.
+</Note>
 
 ---
 
 ## Office Location Directory Overview
 
-{/* IMAGE PLACEHOLDER 1: Main Office Location Table View */}
-
-![Screenshot 2026 09 01 084659](/images/Screenshot-2026-09-01-084659.png "Screenshot 2026 09 01 084659")
+![Office Location Directory](/images/Screenshot-2026-09-01-084659.png "Office Location Directory")
 
 The main office directory displays all available branches along with action buttons to configure work parameters:
 
 - **Copy ID:** Instantly copies the unique office identification key to the clipboard.
 - **Search Input:** Search office locations by name or address details.
+- **Manage Admin Offices:** Assign or unassign office locations for administrator accounts.
 - **Create Office / Reset Device:** Actions to add new branch entries or manage device pairings.
 
 | Column | Description |
@@ -31,23 +32,45 @@ The main office directory displays all available branches along with action butt
 
 ---
 
+## Managing Admin Office Assignments
+
+<img
+  src="/images/Screenshot-2026-09-04-092356.png"
+  alt="Screenshot 2026 09 04 092524"
+  title="Screenshot 2026 09 04 092524"
+  lightAlt="Screenshot 2026 09 04 092524"
+  darkAlt="Screenshot 2026 09 04 092524"
+  className="dark:hidden"
+/>
+<img
+  src="/images/Screenshot-2026-09-04-092524.png"
+  alt="Screenshot 2026 09 04 092524"
+  title="Screenshot 2026 09 04 092524"
+  lightAlt="Screenshot 2026 09 04 092524"
+  darkAlt="Screenshot 2026 09 04 092524"
+  className="hidden dark:block"
+/>
+
+Super Administrators can assign single or multiple office branches to individual administrators using the **Manage Admin Offices** modal:
+
+1. Click the **Manage Admin Offices** button at the top right of the Office Location page.
+2. **Select Admin:** Type the admin's name or email address in the **Search Admin** field and click on their profile from the list.
+3. **Assign Offices:** Under the **Available Offices** section on the right, click **Assign** next to any branch you wish to grant the administrator access to.
+4. **Remove Offices:** To revoke an assigned branch, locate the office under **Currently Assigned** on the left and click **Remove**.
+
+---
+
 ## Managing Shifts & Agent Assignments
 
 <Tabs>
   <Tab title="Start Time Dropdown">
-    {/* IMAGE PLACEHOLDER 2: Manage Shifts Start Time View */}
-
     ![Start Time Dropdown](/images/Screenshot-2026-09-01-084822.png "Start Time Dropdown")
   </Tab>
   <Tab title="End Time Dropdown">
-    {/* IMAGE PLACEHOLDER 3: Manage Shifts End Time View */}
-
     ![End Time Dropdown](/images/Screenshot-2026-09-01-084827.png "End Time Dropdown")
   </Tab>
   <Tab title="Assign Users">
-    {/* IMAGE PLACEHOLDER 4: Manage Shifts User Assignment View */}
-
-    ![Screenshot 2026 09 01 084832](/images/Screenshot-2026-09-01-084832.png "Screenshot 2026 09 01 084832")
+    ![User Assignment](/images/Screenshot-2026-09-01-084832.png "User Assignment")
   </Tab>
 </Tabs>
 
@@ -66,8 +89,6 @@ Click **Manage Shifts** on any office row to create work shifts and assign local
 
 ## Work Schedule Setup
 
-{/* IMAGE PLACEHOLDER 5: Work Schedule Modal */}
-
 ![Work Schedule Setup](/images/Screenshot-2026-09-01-084914.png "Work Schedule Setup Modal")
 
 Click **Manage Work Schedule** to build daily attendance rosters:
@@ -85,13 +106,9 @@ Click **Manage Work Schedule** to build daily attendance rosters:
 
 <Tabs>
   <Tab title="Map Positioning">
-    {/* IMAGE PLACEHOLDER 6: Update Office Location Map Modal */}
-
     ![Update Office Location Map](/images/Screenshot-2026-09-01-084957.png "Update Office Location Map Modal")
   </Tab>
   <Tab title="Geofence Radius">
-    {/* IMAGE PLACEHOLDER 7: Geofence Radius Slider and Coordinates */}
-
     ![Geofence Radius Slider](/images/Screenshot-2026-09-01-085003.png "Geofence Radius Slider and Coordinates")
   </Tab>
 </Tabs>
